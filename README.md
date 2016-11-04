@@ -80,6 +80,8 @@ del a, b, c  # 删除多个变量引用
 - 使用`+`拼接字符串
 
 ```python
+str = "hello world"
+
 print (str)                     # 打印字符串
 print (str[0])					# 打印第一个字符 						
 print (str[2:4])				# 打印第3到第5个字符，左闭右开区间[2,4)
@@ -90,5 +92,45 @@ print (str + ' hello python')   # 拼接
 ### 2.3 List类型
 用`[]`括起来的，包含多个值、彼此之间逗号分隔的数据类型为List类型。如：`['a', 1, 'c', 2, 4]`，List中的子元素数据类型不必完全一致。List变量访问方式同String类型：  
 ```python
-
+list = ['a', 1, 'c', 2, 4]
+alist = ['b', 'c']
+			
+print (list)					# 打印list
+print (list[0])					# 打印第一个元素
+print (list[1:7])				# 打印第二到八个元素
+print (list[2:])				# 从第三个元素开始打印
+print (list * 2)				# 重复打印两遍
+print (list + alist)			# 两个集合拼接
 ```
+
+### 2.4 Tuple类型
+Tuple类型与List类型相似，区别在于形式上，tuple类型使用`()`包围，另外，tuple相当于不可改变的list，只能当做常量使用，其值不能更改。
+```python
+tuple = ('a', 1, 'c', 2, 4)
+atuple = ('b', 'c')
+
+print (tuple)					# 打印tuple
+print (tuple[0])				# 打印第一个元素
+print (tuple[1:7])				# 打印第二到八个元素
+print (tuple[2:])				# 从第三个元素开始打印
+print (tuple * 2)				# 重复打印两遍
+print (tuple + atuple)			# 两个tuple拼接
+
+# list的元素可以随意改变
+print ("原list：")
+print (list)
+list[0] = 2
+print ("修改后list：")
+print (list)
+
+# tuple的元素不可改变
+# TypeError: 'tuple' object does not support item assignment
+# tuple[0] = 2
+```
+
+### 2.5 Dictionary类型
+Dictionary类型类似于Java中的Map类型，一种key-value的表现形式。key和value可以是任何类型，但是一般来说，使用数字或字符型作为key。
+```python
+print ("Dictionary类型：")
+```
+
