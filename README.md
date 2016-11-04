@@ -1,7 +1,7 @@
 # StartFromZero-Python
 # Python
 ## 1 标识符
-- 以英文字母或_开头
+- 以英文字母或`_`开头
 - 可包含字母、数字和下划线
 - 不可包含标点符号：@、$、%
 - 大小写敏感
@@ -14,23 +14,24 @@
 
 ### 1.2 保留字
 
-and|exec|not
-as|finally|or
-assert|for|pass
-break|from|print
-class|global|raise
-continue|if|return
-def|import|try
-del|in|while
-elif|is|with
-else|lambda|yield
-except||
+| - | - | - |
+|and|exec|not|
+|as|finally|or|
+|assert|for|pass|
+|break|from|print|
+|class|global|raise|
+|continue|if|return|
+|def|import|try|
+|del|in|while|
+|elif|is|with|
+|else|lambda|yield|
+|except|||
 
 ### 1.3 代码块
 Python使用缩进组织代码块而不是{}，同一代码块的代码缩进量必须一致。  
 
 ### 1.4 多行语句
-Python的语句遇到换行时结束。如果一条语句需要换行，需要使用换行连接符'\'。如：  
+Python的语句遇到换行时结束。如果一条语句需要换行，需要使用换行连接符`\`。如：  
 ```python
 total = item_one + \
 		item_two + \
