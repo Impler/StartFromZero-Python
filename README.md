@@ -14,7 +14,7 @@
 
 ### 1.2 保留字
 
-| - | - | - |
+|:-:|:-:|:-:|
 |and|exec|not|
 |as|finally|or|
 |assert|for|pass|
@@ -129,8 +129,59 @@ print (list)
 ```
 
 ### 2.5 Dictionary类型
-Dictionary类型类似于Java中的Map类型，一种key-value的表现形式。key和value可以是任何类型，但是一般来说，使用数字或字符型作为key。
+Dictionary类型类似于Java中的Map类型，一种key-value的表现形式。key和value可以是任何类型，但是一般来说，使用数字或字符型作为key。Dictionary类型使用`{}`包裹。  
 ```python
 print ("Dictionary类型：")
+dict = {"k1": "v1", "k2":1}
+dict['one'] = "one"
+dict[2] = 2
+dict[3] = "three"
+
+print (dict)			# 打印dictionary
+print (dict[2]) 		# 打印key为2的值
+print (dict["one"])		# 打印key为one的值
+print (dict.keys())		# 打印所有key
+print (dict.values())	# 打印所有value
 ```
+### 2.6 类型转换
+
+|方法|描述|实例
+|:--:|:--:| -- |
+|int(x [,base])|把数字x转成整数（直接舍去小数部分），或是把字符x转成整数，base指定当前数字表示的进制||
+|float(x)|Converts x to a floating-point number.||
+|complex(real [,imag])|Creates a complex number.||
+|str(x)|Converts object x to a string representation.||
+|repr(x)|Converts object x to an expression string.||
+|eval(str)|Evaluates a string and returns an object.||
+|tuple(s)|Converts s to a tuple.||
+|list(s)|Converts s to a list.||
+|set(s)|Converts s to a set.||
+|dict(d)|Creates a dictionary. d must be a sequence of (key,value) tuples.||
+|frozenset(s)|Converts s to a frozen set.||
+|chr(x)|Converts an integer to a character.||
+|unichr(x)|Converts an integer to a Unicode character.||
+|ord(x)|Converts a single character to its integer value.||
+|hex(x)|Converts an integer to a hexadecimal string.||
+|oct(x)|Converts an integer to an octal string.||
+
+## 3 操作符
+Python包含所有常见的基本操作符，也新增了一些操作符。  
+- 算术运算符：+、-、*、/、%、**(指数)、//（整除商）
+例如：  
+```python
+print ("2**2=",2**2) 		# 4
+print ("19//4=", 19//4) 	# 4
+print ("-12//5=", -12//5) 	# -3
+print ("12//-5=", 12//-5) 	# -3
+```
+- 关系运算符：==、!=、>、>=、<、<=
+- 赋值运算符：=、+=、-=、*=、/=、%=、**=、//=
+- 逻辑运算符：and、or、not（小写）
+- 位运算符：&、|、^、~、<<、>>
+- 成员运算符：in、not in
+例如：
+```python
+```
+- id运算符：
+
 

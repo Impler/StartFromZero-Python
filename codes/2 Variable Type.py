@@ -10,6 +10,7 @@ print (size)
 print (name)
 
 # ------------------
+print ("------------")
 print ("字符类型：")
 str = "hello world"
 
@@ -21,6 +22,7 @@ print (str * 3)					# 打印三遍
 print (str + ' hello python')   # 拼接
 
 # ------------------
+print ("------------")
 print ("List类型：")
 list = ['a', 1, 'c', 2, 4]
 alist = ['b', 'c']
@@ -33,6 +35,7 @@ print (list * 2)				# 重复打印两遍
 print (list + alist)			# 两个集合拼接
 
 # ------------------
+print ("------------")
 print ("Tuple类型：")
 tuple = ('a', 1, 'c', 2, 4)
 atuple = ('b', 'c')
@@ -54,3 +57,27 @@ print (list)
 # tuple的元素不可改变
 # TypeError: 'tuple' object does not support item assignment
 # tuple[0] = 2
+
+#--------------------
+print ("------------")
+print ("Dictionary类型：")
+
+dict = {"k1": "v1", "k2":1}
+dict['one'] = "one"
+dict[2] = 2
+dict[3] = "three"
+
+print (dict)			# 打印dictionary
+print (dict[2]) 		# 打印key为2的值
+print (dict["one"])		# 打印key为one的值
+print (dict.keys())		# 打印所有key
+print (dict.values())	# 打印所有value
+
+#------------------
+print ("------------")
+print ("类型转换：")
+print ("int(x [,base])")
+print (int("11", 2))
+print (int(12.4))
+# ValueError: invalid literal for int() with base 2: '11.2'
+# print (int("11.2", 2))
