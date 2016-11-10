@@ -178,10 +178,43 @@ print ("12//-5=", 12//-5) 	# -3
 - 赋值运算符：=、+=、-=、*=、/=、%=、**=、//=
 - 逻辑运算符：and、or、not（小写）
 - 位运算符：&、|、^、~、<<、>>
-- 成员运算符：in、not in
+- 成员运算符：in、not in （strings，lists，tuples）
 例如：
 ```python
+str = "abcdef"
+print ("'d' in", str, "=", "d" in str)		# True
+print ("'g' in", str, "=", "g" in str)		# False
 ```
-- id运算符：
+- id运算符：is、is not（比较对象的地址是否一样，同id()方法）
+例如：  
+```python
+s1 = "a"
+s2 = "a"
+s3 = "b"
+print ("id(s1) =", id(s1))
+print ("id(s2) =", id(s2))
+print ("id(s3) =", id(s3))
+print ("s1 is s2 =", s1 is s2)		#True
+print ("s1 is s3 =", s1 is s3)		#False
+```
+
+### 3.1 操作符优先级
+
+|操作符|优先级|
+|:-:|:-:|
+|** |1|
+|~ + - |2|
+|* / % // |3|
+|+ - |4|
+|>> << |5|
+|& |6|
+|^ | |7|
+|<= < > >= |8|
+|<> == != |9|
+|= %= /= //= -= += *= **= |10|
+|is is not |11|
+|in not in |12|
+|not or and |13|
+
 
 
