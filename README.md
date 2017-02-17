@@ -50,6 +50,14 @@ total = item_one + \
 
 ### 1.8 suite
 一组独立的语句组成的代码块成为suite，例如if、while、def等语句。suite的首行以关键字开头，行尾以':'结束，下面紧跟着该suite下的代码块
+```python
+if expression : 
+   suite
+elif expression : 
+   suite 
+else : 
+   suite
+```
 
 ## 2 数据类型
 在定义Python变量时，不需要指定其数据类型，数据类型是根据赋值的数据类型确定的。如：  
@@ -216,5 +224,136 @@ print ("s1 is s3 =", s1 is s3)		#False
 |in not in |12|
 |not or and |13|
 
+## 4 if 语句
+在Python中，非0或非空的表达式视为TRUE, 0或空值的表达式视为FALSE。  
+### 4.1 if语句
+```python
+if expression:
+   statement(s)
+```
+### 4.2 if-else语句
+```python
+if expression:
+   statement(s)
+else:
+   statement(s)
+```
+#### 4.2.1 if-elif-else语句
+```python
+if expression1:
+   statement(s)
+elif expression2:
+   statement(s)
+elif expression3:
+   statement(s)
+else:
+   statement(s)
+```
+### 4.3 if 嵌套
+```python
+if expression1:
+   statement(s)
+   if expression2:
+      statement(s)
+   elif expression3:
+      statement(s)
+   else
+      statement(s)
+elif expression4:
+   statement(s)
+else:
+   statement(s)
+```
 
+## 5 循环语句
+### 5.1 while 循环
+```python
+while expression:
+   statement(s)
+```
+此外，while可以搭配else使用，当循环条件不满足时调用：  
+```python
+count = 0
+while count < 5:
+   print (count, " is  less than 5")
+   count = count + 1
+else:
+   print (count, " is not less than 5")
+```
 
+### 5.2 for 循环
+for循环用于迭代集合、序列等对象。  
+```python
+for iterating_var in sequence:
+   statements(s)
+```
+python内置方法`range()`，用于迭代数字，可用于循环中：  
+```python
+for var in list(range(5)):
+   print (var)
+```
+同样，for也可以搭配else使用：  
+```python
+for num in numbers:
+   if num%2 == 0:
+      print ('the list contains an even number')
+      break
+else:
+   print ('the list doesnot contain even number')
+```
+
+同其他语言，python同样支持在循环中使用break结束循环、continue跳过当次循环。  
+此外python在循环中新增`pass`语句，不执行任何操作，只起到占位作用:  
+```python
+for letter in 'Python': 
+   if letter == 'h':
+      pass
+      print ('This is pass block')
+   print ('Current Letter :', letter)
+
+print ("Good bye!")
+```
+### 5.3 Iterator对象
+`iter()`方法用于创建字符串、List、Tuple对象的Iterator对象，`next()`方法返回Iterator对象的迭代结果。  
+```python
+list = [1,2,3,4]
+# 创建List的迭代对象
+it = iter(list) 
+# 打印迭代对象的下一个值
+print (next(it))
+# 迭代器对象可用在循环中
+# for 循环
+for x in it:
+   print (x, end=" ")
+
+# while循环
+while True:
+   try:
+      print (next(it))
+   except StopIteration:
+      sys.exit()
+
+```
+### 5.5 Generator 对象
+generator 是指使用`yield`方法使一个方法产生一个可迭代的序列。  
+当一个generator被调用时，并不是直接返回方法执行后的结果，而是先返回一个generator对象。当使用`next()`方法调用generator时，方法才开始执行，并在`yield`方法处暂停，返回此时的结果；待到下一次`next()`调用过来，方法从上一步`yield`暂停处，继续执行，直到遇到下一个`yield`，以此类推。  
+```python
+# 定义一个generator方法(内部使用了yield)
+def fibonacci(n): 
+   a, b, counter = 0, 1, 0
+   while True:
+      if (counter > n): 
+         return
+      yield a
+      a, b = b, a + b
+      counter += 1
+# f为一个generator对象，而非方法执行返回的结果
+f = fibonacci(5) 
+
+# 迭代这个generator对象
+while True:
+   try:
+      print (next(f), end=" ")
+   except StopIteration:
+      sys.exit()
+```
