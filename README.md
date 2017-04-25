@@ -44,7 +44,22 @@ total = item_one + \
 在Python中单引号('')、双引号("")、三引号("""""")均可以表示字符串，一般三引号用于需要换行的字符串  
 
 ### 1.6 注释
-使用'#'开头的语句表示注释
+- 单行注释以'#'开头  
+- 多行注释使用三个单引号(''')或三个双引号(""")将注释括起来  
+
+```python
+# 这是单行注释
+'''
+这是多行注释，用三个单引号
+这是多行注释，用三个单引号 
+这是多行注释，用三个单引号
+'''
+"""
+这是多行注释，用三个单引号
+这是多行注释，用三个单引号 
+这是多行注释，用三个单引号
+"""
+```
 
 ### 1.7 分号
 多个语句同在一行时，使用分号分隔
@@ -74,7 +89,7 @@ Python主要包含5种数据类型，分别是：Numbers、String、List、Tuple
 Python的包含3种数字类型：
 - int：整型，可表示长整型
 - float：浮点型
-- complex：形如 x + yj，其中x，y是真实的数字，j为未知数
+- complex：复数由实数部分和虚数部分构成，可以用a + bj,或者complex(a,b)表示， 复数的实部a和虚部b都是浮点型。
 
 使用`del`语句删除变量的引用：  
 ```python
@@ -152,26 +167,53 @@ print (dict["one"])		# 打印key为one的值
 print (dict.keys())		# 打印所有key
 print (dict.values())	# 打印所有value
 ```
-### 2.6 类型转换
+###2.6 Set类型
+set是一个无序不重复元素的序列。  
+基本功能是进行成员关系测试和删除重复元素。  
+可以使用大括号 { } 或者 set() 函数创建集合，注意：创建一个空集合必须用 set() 而不是 { }，因为 { } 是用来创建一个空字典。  
+``` python
+student = {'Tom', 'Jim', 'Mary', 'Tom', 'Jack', 'Rose'}
+
+print(student)   # 输出集合，重复的元素被自动去掉
+
+# 成员测试
+if('Rose' in student) :
+    print('Rose 在集合中')
+else :
+    print('Rose 不在集合中')
+
+# set可以进行集合运算
+a = set('abracadabra')
+b = set('alacazam')
+
+print(a)
+print(a - b)     # a和b的差集
+print(a | b)     # a和b的并集
+print(a & b)     # a和b的交集
+print(a ^ b)     # a和b中不同时存在的元素
+
+```
+
+### 2.7 类型转换
 
 |方法|描述|实例
 |:--:|:--|:--|
 |int(x [,base])|把数字x转成整数（直接舍去小数部分），或是把字符x转成整数，base指定当前数字表示的进制||
-|float(x)|Converts x to a floating-point number.||
-|complex(real [,imag])|Creates a complex number.||
-|str(x)|Converts object x to a string representation.||
-|repr(x)|Converts object x to an expression string.||
-|eval(str)|Evaluates a string and returns an object.||
-|tuple(s)|Converts s to a tuple.||
-|list(s)|Converts s to a list.||
-|set(s)|Converts s to a set.||
-|dict(d)|Creates a dictionary. d must be a sequence of (key,value) tuples.||
-|frozenset(s)|Converts s to a frozen set.||
-|chr(x)|Converts an integer to a character.||
-|unichr(x)|Converts an integer to a Unicode character.||
-|ord(x)|Converts a single character to its integer value.||
-|hex(x)|Converts an integer to a hexadecimal string.||
-|oct(x)|Converts an integer to an octal string.||
+|float(x)|将x转换到一个浮点数||
+|complex(real [,imag])|创建一个复数||
+|str(x)|将对象 x 转换为字符串||
+|repr(x)|将对象 x 转换为表达式字符串||
+|eval(str)|用来计算在字符串中的有效Python表达式,并返回一个对象||
+|tuple(s)|将序列 s 转换为一个元组||
+|list(s)|将序列 s 转换为一个元组||
+|set(s)|转换为可变集合||
+|dict(d)|创建一个字典。d 必须是一个序列 (key,value)元组。||
+|frozenset(s)|转换为不可变集合||
+|chr(x)|将一个整数转换为一个字符||
+|unichr(x)|将一个整数转换为Unicode字符||
+|ord(x)|将一个字符转换为它的整数值||
+|hex(x)|将一个整数转换为一个十六进制字符串||
+|oct(x)|将一个整数转换为一个八进制字符串||
 
 ## 3 操作符
 Python包含所有常见的基本操作符，也新增了一些操作符。  
