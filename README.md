@@ -113,7 +113,7 @@ Python主要包含5种数据类型，分别是：Numbers、String、List、Tuple
 Python的包含3种数字类型：
 - int：整型，可表示长整型
 - float：浮点型
-- complex：复数由实数部分和虚数部分构成，可以用a + bj,或者complex(a,b)表示， 复数的实部a和虚部b都是浮点型。
+- complex：复数由实数部分和虚数部分构成，可以用a + bj,或者complex(a,b)表示， 复数的实部a和虚部b都是浮点型。  
 
 使用`del`语句删除变量的引用：  
 ```python
@@ -218,7 +218,18 @@ print(a ^ b)     # a和b中不同时存在的元素
 
 ```
 
-### 2.7 类型转换
+### 2.7 日期和时间
+Python 提供了一个 time 和 calendar 模块可以用于格式化日期和时间。  
+时间间隔是以秒为单位的浮点小数。  
+每个时间戳都以自从1970年1月1日午夜（历元）经过了多长时间来表示。  
+Python 的 time 模块下有很多函数可以转换常见日期格式。  
+```python
+import time;  # 引入time模块
+ticks = time.time()
+print("当前时间戳为:", ticks)
+```
+
+### 2.8 类型转换
 
 |方法|描述|实例
 |:--:|:--|:--|
@@ -401,7 +412,7 @@ while True:
       sys.exit()
 
 ```
-### 5.5 Generator 对象
+### 5.4 Generator 对象
 generator 是指使用`yield`方法使一个方法产生一个可迭代的序列。  
 当一个generator被调用时，并不是直接返回方法执行后的结果，而是先返回一个generator对象。当使用`next()`方法调用generator时，方法才开始执行，并在`yield`方法处暂停，返回此时的结果；待到下一次`next()`调用过来，方法从上一步`yield`暂停处，继续执行，直到遇到下一个`yield`，以此类推。  
 ```python
