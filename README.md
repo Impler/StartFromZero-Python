@@ -435,3 +435,151 @@ while True:
    except StopIteration:
       sys.exit()
 ```
+
+## 6 函数
+### 6.1 定义函数
+- 以`def`关键字开头，后接函数名和圆括号
+- 入参放在圆括号中间
+- 函数的第一行可以选择性的使用文档字符串--注释
+- 函数内容以冒号起始，并且缩进
+- return [表达式] 结束函数。不带表达式的return相当于返回none
+
+```python
+def functionname( parameters ):
+   "函数_文档字符串"
+   function_suite
+   return [expression]
+
+# 方法定义
+def printme(str):
+	"打印传入的参数"
+	print(str)
+	return
+
+# 方法调用
+printme("hello world")
+```
+
+### 6.2 参数传递
+在Python中，变量没有类型，仅仅是一个对象的引用（指针），只有对象是有类型的。  
+在Python中，对象分为可更改对象和不可更改对象，像string，tuples和numbers 是不可更改对象，而 list，dict 则是可更改对象。  
+- 当向方法中传递一个不可改变对象，相当于值传递，在方法内部对该对象副本的修改，不会影响对象本身
+- 当向方法中传递一个可变对象时，相当于引用传递，任何修改都将直接作用于该对象上
+``` python
+a = 1
+# 传递不可变对象
+def changeme1(a):
+	a = 2
+	print("方法内a = ", a)
+	return
+
+# 输出
+# 方法内a =  2
+# 方法外a =  1
+changeme1(a)
+print("方法外a = ", a)
+
+b = [1, 2, 3]
+# 传递可变对象
+def changeme2(b):
+	b.append([4, 5, 6])
+	print("方法内b = ", b)
+	return
+# 输出
+# 方法内b =  [1, 2, 3, [4, 5, 6]]
+# 方法外b =  [1, 2, 3, [4, 5, 6]]
+changeme2(b)
+print("方法外b = ", b)
+
+```
+
+### 6.3 实参
+调用函数时可使用的正式参数类型:  
+- 必备参数
+- 关键字参数
+- 默认参数
+- 不定长参数
+
+#### 6.3.1 必备参数
+必备参数必须以正确的顺序传入函数。调用时的数量必须与声明时一致。  
+```python
+# 直接调用上面定义的printme函数
+printme()
+# 执行报错：
+# Traceback (most recent call last):
+# printme()
+# TypeError: printme() missing 1 required positional argument: 'str'
+```
+
+#### 6.3.2 关键字参数
+函数调用使用关键字参数来确定传入的参数值，参数顺序与生命顺序不必一致。  
+```python
+def printscore(name, score):
+	print("学生：", name, "，分数：", score)
+	return
+
+stu = "小明"
+mathScore = 99
+# 输出 学生： 小明 ，分数： 99
+printscore(stu, mathScore)
+# 输出 学生： 小明 ，分数： 100
+printscore(score=mathScore + 1, name=stu)
+```
+
+#### 6.3.3 缺省参数
+函数调用时，缺省参数的值如果没有传入，则被任务是使用默认值。  
+```python
+def printAge(name, age = 10):
+	print("学生：", name, "年龄：", age)
+	return
+# 输出 学生： 小明 年龄： 12
+printAge("小明", 12)
+# 输出 学生： 小红 年龄： 10
+printAge("小红")
+```
+
+#### 6.3.4 不定长参数
+如果函数定义时不能确定实际会传入多少个参数，则可以使用不定长参数。  
+语法如下：  
+```python
+def functionname([formal_args,], *varName):
+  function_suite
+  return [expression]
+```
+加了（*）的变量名会存放所有未命名的变量参数。  
+```python
+def printFamily(father, *others):
+	print("户主：", father)
+	print("其他人：")
+	for name in others:
+		print(name)
+# 输出
+# 户主： father
+# 其他人：
+printFamily("father")
+
+# 输出
+# 户主： father
+# 其他人：
+# mather
+# brother
+printFamily("father", "mather", "brother")
+```
+
+### 6.4 匿名函数
+Python使用lambda来创建匿名函数。  
+- lambda只是一个表达式，函数体比def简单的多
+- lambda的主体是一个表达式，而不是一个代码块。仅能封装有限的逻辑进去
+- lambda函数拥有自己的命名空间，且不能访问自由参数列表外（包括全局命名空间里）的变量。
+- 虽然lambda函数看起来只能写一行，却不等同于C或C++的内联函数，后者的目的是调用小函数时不占用栈内存从而增加运行效率。
+
+语法如下：  
+```python
+lambda [arg1 [,arg2,.....argn]]:expression
+```
+示例：  
+```python
+sum = lambda n1, n2, n3: n1+n2+n3
+# 输出6
+print("求和：", sum(1, 2, 3))
+```
