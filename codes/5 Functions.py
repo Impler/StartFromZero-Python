@@ -84,3 +84,34 @@ sum = lambda n1, n2, n3: n1+n2+n3
 # 输出6
 print("求和：", sum(1, 2, 3))
 print("*****************lambda匿名函数 END***********************")
+
+print("*****************变量作用域 START***********************")
+# 定义一个全局变量
+total = 0
+def add(num1, num2):
+	# 定义一个重名的局部变量
+	total = num1 + num2
+	print("局部total = ", total)
+	return total
+# 输出 5
+add(2, 3)
+# 输出 0
+print("全局total = ", total)
+print("*****************************")
+
+glbTotal = 0
+def add1(num1, num2):
+	# 定义一个重名的局部变量
+	glbTotal = num1 + num2
+	print("局部glbTotal = ", glbTotal)
+
+	# 操作全局变量，需要使用global关键字声明，声明后的操作均作用于全局变量
+	global glbTotal
+	glbTotal = num1 + 1
+	return glbTotal
+# 输出 5
+t = add1(2, 3)
+print("方法返回：", t)
+# 输出 0
+print("全局glbTotal = ", glbTotal)
+print("*****************变量作用域 END***********************")
