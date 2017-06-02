@@ -115,3 +115,19 @@ print("方法返回：", t)
 # 输出 0
 print("全局glbTotal = ", glbTotal)
 print("*****************变量作用域 END***********************")
+print("*****************变量作用域 nolocal START***********************")
+def outer():
+	num = 1
+	print("outer num: ", num)
+	def inner():
+		num = 2
+		print("inner num: ", num)
+		# 修改嵌套作用于变量
+		nonlocal num
+		num = 3
+
+	inner()
+	print("outer num: ", num)
+outer()
+print("*****************变量作用域 nolocal END***********************")
+
