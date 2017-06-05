@@ -151,7 +151,7 @@ print (list * 2)				# 重复打印两遍
 print (list + alist)			# 两个集合拼接
 ```
 
-### 2.4 Tuple类型
+### 2.4 Tuple（元组）类型
 Tuple类型与List类型相似，区别在于形式上，tuple类型使用`()`包围，另外，tuple相当于不可改变的list，只能当做常量使用，其值不能更改。
 ```python
 tuple = ('a', 1, 'c', 2, 4)
@@ -672,3 +672,155 @@ outer()
 [2, 4]
 ```
 
+#### 7.1.3 del语句
+使用del语句可以从一个列表中依索引而不是值来删除元素。  
+```python
+>>> lists = [1,3,4,5,5,7]
+## 删除第一个元素
+>>> del lists[0]
+>>> lists
+[3, 4, 5, 5, 7]
+## 删除第二到四个元素
+>>> del lists[1:3]
+>>> lists
+[3, 5, 7]
+## 清空列表
+>>> del lists[:]
+>>> lists
+[]
+
+## del也可以用来删除实体变量
+>>> del lists
+>>> lists
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'lists' is not defined
+```
+
+### 7.2 元组和序列
+元组由若干逗号分隔的值组成，例如：
+```python
+>>> t = 1,2,2,3
+>>> t
+(1, 2, 2, 3)
+>>> t[2]
+2
+>>> u = t, 4,5,6
+>>> u
+((1, 2, 2, 3), 4, 5, 6)
+>>> p = t, u, (7,8,9)
+>>> p
+((1, 2, 2, 3), ((1, 2, 2, 3), 4, 5, 6), (7, 8, 9))
+```
+
+### 7.3 集合
+集合是一个无序不重复元素的集合。可以用大括号`{}`创建，如果要创建一个空集合，必须使用`set()`而不是`{}`。后者则是用于创建一个空的字典。  
+```python
+>>> s = {1, 2, 2, 4}
+>>> s
+{1, 2, 4}
+>>> 3 in s
+False
+>>> 4 in s
+True
+
+>>> a = set('abcd')
+>>> a
+{'c', 'a', 'b', 'd'}
+>>> b = set('abef')
+>>> b
+{'a', 'b', 'e', 'f'}
+## a中存在b中不存在
+>>> a - b
+{'c', 'd'}
+## 在a或b中存在的字母
+>>> a | b
+{'c', 'd', 'e', 'b', 'f', 'a'}
+## a、b中都存在的记录
+>>> a & b
+{'a', 'b'}
+## 在a、b中的元素，但不同时存在于a、b中
+>>> a ^ b
+{'c', 'd', 'e', 'f'}
+```
+
+### 7.4 字典
+一组键值对集合。使用大括号创建一个空的字典。  
+```python
+>>> dic = {'name':'tom', 'age': 12}
+>>> dic
+{'name': 'tom', 'age': 12}
+>>> dic['name']
+'tom'
+>>> list(dic.keys())
+['name', 'age']
+>>> list(dic.values())
+['tom', 12]
+>>> 'name' in dic
+True
+>>> dic['age'] = 15
+>>> dic
+{'name': 'tom', 'age': 15}
+```
+构造函数 dict() 直接从键值对元组列表中构建字典:  
+```python
+>>> d = dict([('name', 'kitty'), ('age', 15)])
+>>> d
+{'name': 'kitty', 'age': 15}
+```
+
+### 7.5 遍历
+字典的遍历可以使用`items()`方法同时获取键和对应的值：  
+```python
+>>> for k, v in d.items():
+...   print(k, v)
+...
+name kitty
+age 15
+```
+
+在序列遍历中，索引和对应位置的值，可以通过`enumerate()`获取：  
+```python
+>>> for i, v in enumerate(['abc', 'pad', 'apple']):
+...     print(i, v)
+...
+0 abc
+1 pad
+2 apple
+```
+
+同时遍历两个或更多的序列，可以使用 `zip()`:  
+```python
+>>> a = ['a1', 'a2', 'a3']
+>>> b = ['b1', 'b2', 'b3', 'b4']
+>>> for p, q in zip(a, b):
+...     print(p, q)
+...
+## 只会打印相同长度的内容
+a1 b1
+a2 b2
+a3 b3
+```
+
+反向遍历一个序列，使用 `reversed()` 函数：  
+```python
+>>> for i in reversed([2, 4, 5, 6]):
+...     print(i)
+...
+6
+5
+4
+2
+```
+
+按顺序遍历一个序列，可以用`sorted()`方法返回一个排序的序列：  
+```python
+>>> for i in sorted([4, 1, 5, 3, 6]):
+...     print(i)
+...
+1
+3
+4
+5
+6
+```
