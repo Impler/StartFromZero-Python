@@ -824,3 +824,86 @@ a3 b3
 5
 6
 ```
+
+## 8 模块
+模块是一个包含所有定义的函数和变量的文件，其后缀名是.py。模块可以被别的程序引入，以使用该模块中的函数等功能。  
+
+```python
+#!/usr/bin/python3
+## 文件名 m01.py
+## 引入标准库中的sys.py模块
+import sys
+print('命令行参数如下：')
+## sys.argv是一个包含命令行参数的列表
+for i in sys.argv:
+	print(i)
+```
+执行：  
+```python
+xxx>python m01.py v1 v2 v3
+命令行参数如下：
+m01.py
+v1
+v2
+v3
+```
+
+### 8.1 import语句
+在python源文件中使用import语句引入其他模块。  
+语法为：`import module1[,module2[,... moduleN]]`  
+一个模块只会被导入一次，不管执行多少次import。当使用import语句的时候，python通过搜索一系列目录来找到对应的文件。这些搜索路径存放在sys模块模块的path变量中。  
+```python
+>>> import sys
+>>> sys.path
+['', 'D:\\1_software\\Python\\python35.zip', 'D:\\1_software\\Python\\DLLs', 'D:
+\\1_software\\Python\\lib', 'D:\\1_software\\Python', 'D:\\1_software\\Python\\l
+ib\\site-packages']
+```
+sys.path输出的是一个列表，第一项是空串，代表当前目录或运行的脚本所在的目录。  
+使用import引入模块后，通过`模块名.函数名`访问模块内函数:  
+```python
+#!/usr/bin/python3
+## 文件名 fbi.py
+## 打印n个斐波那契数列
+def fib(n):
+	i = 0
+	a, b = 0, 1
+	while i < n:
+		print(a, end=' ')
+		a, b = b, a+b
+		i+=1
+	print()
+
+## 返回n个斐波那契数列
+def fib2(n):
+	i = 0
+	result = []
+	a, b = 0, 1
+	while i < n:
+		result.append(a)
+		a, b = b, a+b
+		i+=1
+
+	return result
+```
+```python
+>>> import fib
+>>> fib.fib(4)
+0 1 1 2
+## 如果经常使用一个函数，可以把它赋给一个本地变量：
+>>> myfib = fib.fib
+>>> myfib(4)
+0 1 1 2
+```
+
+### 8.2 from...import语句
+from...import语句可以从模块中导入一个指定的部分到当前命名空间下：  
+`from moduleName import name1[, name2[, ... nameN]]`
+例如：  
+```python
+>>> from fib import fib, fib2
+>>> fib(2)
+0 1
+>>> fib2(2)
+[0, 1]
+```
