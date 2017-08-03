@@ -1001,8 +1001,215 @@ f.close()
 		- 1：从当前位置开始
 		- 2：从文件末尾开始
 - f.close()：关闭文件并释放系统的资源
+- file.truncate([size])：从文件的首行首字符开始截断，截断文件为 size 个字符。windows下面的换行代表两个字符大小
+- file.next()：返回文件下一行
 
 
+## 10 os模块
+os模块提供了大量用于处理文件和目录方法。  
 
 
+## 11 异常处理
 
+一个try语句可能包含多个except子句，分别处理不同的异常。  
+```python
+try:
+    ...
+except [ErrorName1]:
+    ...
+except [ErrorNameN]:
+    ...
+```
+一个except子句也可以同时处理多个异常，这些异常被放在括号里，组成一个元组。  
+```python
+try:
+    ...
+except (ErrorName1,... ErrorNameN):
+    ...
+```
+最后一个except子句可以忽略异常的名称，它将被当作通配符使用。  
+```python
+try:
+    ...
+except [ErrorName1]:
+    ...
+except [ErrorNameN]:
+    ...
+except:
+    ...
+```
+try except 语句还有一个可选的else子句，如果使用这个子句，必须放在所有的except子句之后，这个子句在try子句没有发生任何异常的时候执行。  
+```python
+try:
+    ...
+except [ErrorName1]:
+    ...
+except [ErrorNameN]:
+    ...
+except:
+    ...
+else:
+    ...
+```
+Python使用raise语句抛出一个指定的异常。raise唯一的一个参数指定了要被抛出的异常，它必须是一个异常的实例或是异常的类。  
+如果在except子句中继续抛出捕获的异常，使用一个简单的raise语句即可。  
+```python
+try:
+    raise NameError('HiThere')
+except NameError:
+    print('An exception flew by!')
+    raise
+```
+
+一些对象定义了标准的清理行为，无论系统是否成功使用它，一旦不需要它了，那么这个标准的清理行为就会执行。  
+使用with语句就可以保证诸如文件之类的对象在使用完后，一定会正确执行其清理方法：  
+```python
+with open("myfile.txt") as f:
+    for line in f:
+        print(line, end="")
+```
+
+## 12 面向对象
+### 12.1 定义
+```python
+class People:
+	## --- 成员变量 ---
+	# 公有成员变量
+	name = ''
+	age = 0
+	# 私有成员变量
+	# 变量名以'__'开头
+	__incoming = 0
+
+	## --- 成员方法 ---
+	## 使用def关键字，且第一个参数必须为self（也可以为别的名字），表示当前对象
+    ## python方法不支持重载，但可以通过缺省参数来实现类似的功能
+	# 私有方法，方法名以'__'开头
+	# __init__()为类的专有方法，相当于构造函数
+	def __init__(self, name='', age=0, incoming=0):
+		self.name = name
+		self.age = age
+		self.__incoming = incoming
+
+    # 公有方法
+	def print(self):
+		print("people name=%s, age=%s, incoming=%d" %(self.name, self.age, self.__incoming))
+
+# 使用缺省参数
+p1 = People()
+# 输出people name=, age=0, incoming=0
+p1.print()
+# 传参
+p2 = People("张三", 20) 
+# 输出 people name=张三, age=20, incoming=0
+p2.print()
+# 调用共有成员
+# 输出 name=张三
+print("name=%s" %(p2.name))
+# 输出 age=20
+print("age=%d" %(p2.age))
+
+# 调用私有成员
+# 输出 私有方法不可访问
+try:
+    p2.__incoming
+except :
+	print("私有方法不可访问")
+```
+类的专有方法:  
+- __init__ : 构造函数，在生成对象时调用
+- __del__ : 析构函数，释放对象时使用
+- __repr__ : 打印，转换
+- __setitem__ : 按照索引赋值
+- __getitem__: 按照索引获取值
+- __len__: 获得长度
+- __cmp__: 比较运算
+- __call__: 函数调用
+- __add__: 加运算
+- __sub__: 减运算
+- __mul__: 乘运算
+- __div__: 除运算
+- __mod__: 求余运算
+- __str__: 类似java对象的toString()
+
+
+### 12.2 继承
+```python
+class A:
+	def __init__(self):
+		print("enter A")
+		print("leave A")
+
+	def print(self):
+		print("A")
+
+
+class B(A):
+	def __init__(self):
+		print("enter B")
+		A.__init__(self)
+		print("leave B")
+class C(A):
+	def __init__(self):
+		print("enter C")
+		A.__init__(self)
+		print("leave C")
+
+
+class D(B, C):
+	def __init__(self):
+		print("enter D")
+		B.__init__(self)
+		C.__init__(self)
+		print("leave D")
+
+	# 方法重写
+	def print(self):
+		print("D")
+
+d = D()
+d.print()
+
+## 输出：
+## enter D
+## enter B
+## enter A
+## leave A
+## leave B
+## enter C
+## enter A
+## leave A
+## leave C
+## leave D
+## D
+```
+
+### 12.3 操作符重载
+同C++，Python语言也提供了操作符重载机制。  
+```python
+class A:
+	__num = 0
+
+	def __init__(self, num):
+		self.__num = num
+
+    ## toString
+	def __str__(self):
+		return 'A(%d)' %(self.__num)
+
+	def getNum(self):
+		return self.__num
+
+	def __add__(self, other):
+		if isinstance(other, A):
+			self.__num += other.getNum()
+
+a1 = A(2)
+a2 = A(3)
+a1 + 3
+## 输出A(2)
+print(a1)
+a1 + a2
+## 输出A(5)
+print(a1)
+```
