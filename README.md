@@ -1091,7 +1091,7 @@ class People:
 		self.age = age
 		self.__incoming = incoming
 
-    # 公有方法
+	# 公有方法
 	def print(self):
 		print("people name=%s, age=%s, incoming=%d" %(self.name, self.age, self.__incoming))
 
@@ -1114,7 +1114,7 @@ print("age=%d" %(p2.age))
 try:
     p2.__incoming
 except :
-	print("私有方法不可访问")
+    print("私有方法不可访问")
 ```
 类的专有方法:  
 - `__init__`: 构造函数，在生成对象时调用
