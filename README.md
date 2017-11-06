@@ -1213,3 +1213,85 @@ a1 + a2
 ## 输出A(5)
 print(a1)
 ```
+
+## 13 正则表达式
+Python 自1.5版本起增加了`re`模块，它提供Perl风格的正则表达式模式。  
+`re`模块使Python语言拥有全部的正则表达式功能。  
+`compile`函数根据一个模式字符串和可选的标志参数生成一个正则表达式对象。该对象拥有一系列方法用于正则表达式匹配和替换。  
+
+### 13.1 re.match函数
+re.match函数尝试从字符串的起始位置匹配一个模式，如果不是起始位置匹配成功的话，返回None。  
+语法如下：  
+```python
+re.match(pattern, string, flags=0)
+```
+参数说明：  
+- pattern: 匹配的正则表达式
+- string: 要匹配的字符串
+- flags: 标志位，用于控制正则表达式的匹配方式，如：是否大小写、多行匹配等。
+
+匹配成功`re.match`方法返回一个匹配的对象，否则返回None。  
+我们可以使用`group(num)`或`groups()`匹配对象函数来获取匹配表达式。  
+- `group(num=0)`: 匹配的整个表达式的字符串，`group()`可以一次输入多个组好，在这种情况下它讲返回一个包含那些组所对应值得元组。
+- `groups()`: 返回一个包含所有组字符串的元组，从1到所含的组号。
+
+```python
+import re
+matchObj = re.match("abc(\d+)d(.*)", "abc121d9b")
+# 输出 matchObj ==> <_sre.SRE_Match object; span=(0, 9), match='abc121d9b'>
+print("matchObj ==>", matchObj)
+index = 0
+groups = matchObj.groups()
+# 输出 matchObj.groups() ==>  ('121', '9b')
+print("matchObj.groups() ==> ", groups)
+while index <= len(groups):
+    # 输出 matchObj.group( 0 ) ==>  abc121d9b
+    # 输出 matchObj.group( 1 ) ==>  121
+    # 输出 matchObj.group( 2 ) ==>  9b
+	print("matchObj.group(",index,") ==> ", matchObj.group(index))
+	index = index + 1
+
+# match从起始位置开始匹配，如果起始就不匹配则不再往下进行
+unmatchObj = re.match("abc(\d+)d", "aaabc1d")
+print(unmatchObj)
+if unmatchObj is None:
+	print("no match")
+```
+
+### 13.1 re.search函数
+`re.search`函数扫描整个字符串并返回第一个成功的匹配，这一点有别于`re.match`函数。格式为：  
+```python
+re.search(pattern, string, flags=0)
+```
+参数同`re.match`函数。  
+
+```python
+import re
+searchObj = re.search("abc(\d+)d(.*)", "abc121d9b")
+# 输出 searchObj ==>  <_sre.SRE_Match object; span=(0, 9), match='abc121d9b'>
+print("searchObj ==> ", searchObj)
+groups = searchObj.groups()
+# 输出 searchObj.groups() ==>  ('121', '9b')
+print("searchObj.groups() ==> ", groups)
+index = 0
+while index <= len(groups):
+	# 输出 searchObj.group( 0 ) ==>  abc121d9b
+    # 输出 searchObj.group( 1 ) ==>  121
+    # 输出 searchObj.group( 2 ) ==>  9b
+    print("searchObj.group(", index, ") ==> ", searchObj.group(index))
+    index = index + 1
+
+
+unsearchObj = re.search("aba", "abc")
+if unsearchObj is None:
+	print("No match")
+
+# 注意与re.match()的区别
+searchObj = re.search("abc(\d+)d", "aaabc17d")
+# 输出 <_sre.SRE_Match object; span=(2, 8), match='abc17d'>
+print(searchObj)
+# 输出 17
+print(searchObj.group(1))
+```
+`re.match`与`re.search`的区别是`re.match`只匹配字符串的开始，如果字符串不符合正则表达式，则匹配失败，函数返回None；而`re.search`匹配整个字符串，直到找到一个匹配。  
+
