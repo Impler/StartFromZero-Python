@@ -113,6 +113,19 @@ print("\n==========pattern (?...)==========")
 # match A
 print(re.match('(?i)a', 'A'))
 
+# pattern (?:...)
+print("\n==========pattern (?:...)==========")
+# match body
+print(re.match('bo(?:y|dy)', 'body'))
+
+# pattern (?P<name>pattern)
+print("\n==========pattern (?P<name>pattern)==========")
+# 匹配双引号字符串，同(").*?"
+# match "abc"
+print(re.match('(?P<quote>").*?(?P=quote)', '"abc"'))
+# group quote = "
+print(re.match('(?P<quote>").*?(?P=quote)', '"abc"').groups())
+
 
 
 
