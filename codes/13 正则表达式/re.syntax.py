@@ -127,12 +127,17 @@ print(re.match('(?P<quote>").*?(?P=quote)', '"abc"'))
 print(re.match('(?P<quote>").*?(?P=quote)', '"abc"').groups())
 
 
+# pattern (?=pattern)
+print("\n==========pattern (?=pattern)==========")
+# match Windows
+print(re.match('Windows(?=98|2000|xp)', 'Windows2000'))
 
+# pattern (?!pattern)
+print("\n==========pattern (?!pattern)==========")
+# match Windows
+print(re.match('Windows(?!98|2000|xp)', 'Windows 10'))
 
-
-
-
-
-
-
-
+# pattern (?<=pattern)
+print("\n==========pattern (?<=pattern)==========")
+# match  boy
+print(re.match('(?<=hate|love)abc', 'hateabc'))

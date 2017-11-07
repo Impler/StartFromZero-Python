@@ -1236,14 +1236,14 @@ print(a1)
 |\||或者|
 |(pattern)|分组|
 |(?pattern)|只能放在模式串开头，确定语义。相当于匹配函数中flags参数，只不过把他们放在模式串中。`?`后可跟随'a', 'i', 'L', 'm', 's', 'u', 'x'。这些值分别对应不同的常量：<br />a: re.A 只匹配ASCII字符<br />i: re.I 忽略大小写<br />L: re.L 依赖Locale<br />m: re.M  匹配多行<br />s: re.S即rs.DOTAL，是'.'能够匹配所有字符<br />u: 匹配unicode字符<br />x: re.X 允许在模式串中添加注释|
-|(?:pattern)|匹配pattern但不获取匹配结果，即pattern匹配的内容不会添加到组中，这里的'()'只是一种格式，不代表分组。这在使用或'\|'来组合一个模式的各个部分是很有用，如'industr(?:y|ies)'比'industry|industries'更简略|
+|(?:pattern)|匹配pattern但不获取匹配结果，非获取匹配，即pattern匹配的内容不会添加到组中，这里的'()'只是一种格式，不代表分组。这在使用或'\|'来组合一个模式的各个部分是很有用，如'industr(?:y|ies)'比'industry|industries'更简略|
 |`(?P<name>pattern)`|效果同'()'，只不过可以自定义组名称，后面可以根据组名称获取组内容。不同的位置，引用方式也不同：<br />在当前模式中引用: (?P=name)或\1<br />在match对象中引用: m.group('name')或m.end('name')<br />在`re.sub()`的替换函数中: `\g<name>`或`\g<1>`或\1|
 |(?P=name)|在同一个模式串中引入前面定义的组|
 |(?#pattern)|在模式中使用注释，解析时被忽略|
-|(?=pattern)||
-|(?!pattern)||
-|(?<=pattern)||
-|(?<!pattern)||
+|(?=pattern)|正向肯定预查，在任何匹配pattern的字符串开始处查找字符串。非获取匹配。例如：'Windows(?=98|2000|xp)'能匹配'Windowsxp'中的'Windows'.预查不消耗字符，即一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始|
+|(?!pattern)|正向否定预查，类似肯定预查，不同在于匹配pattern的反例|
+|(?<=pattern)|反向肯定预查，类似正向预查，不同在于方向相反。例如'(?<=95|98|NT|2000)Windows'能匹配'2000Windows'中的'Windows'|
+|(?<!pattern)|反向否定预查，类似肯定预查，不同在于匹配pattern的反例|
 |(?(id/name)yes-pattern\|no-pattern)||
 ### 13.2 正则模块
 Python 自1.5版本起增加了`re`模块，它提供Perl风格的正则表达式模式。  
