@@ -1244,7 +1244,7 @@ print(a1)
 |(?!pattern)||
 |(?<=pattern)||
 |(?<!pattern)||
-|(?(id/name)yes-pattern|no-pattern)||
+|(?(id/name)yes-pattern\|no-pattern)||
 ### 13.2 正则模块
 Python 自1.5版本起增加了`re`模块，它提供Perl风格的正则表达式模式。  
 `re`模块使Python语言拥有全部的正则表达式功能。  
