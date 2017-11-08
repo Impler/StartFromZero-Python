@@ -145,7 +145,7 @@ print(re.search('(?<=XP|98|10)Windows', 'XPWindows'))
 # pattern (?<!pattern)
 print("\n==========pattern (?<pattern)==========")
 # match  Windows
-print(re.search('(?<!XP|98|10)Windows', 'NT Windows'))
+print(re.search('(?<!XP|98|120)Windows', 'NT Windows'))
 
 
 # pattern (?(id/name)yes-pattern\|no-pattern)

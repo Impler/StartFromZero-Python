@@ -1262,7 +1262,7 @@ print(a1)
 |:-|:-|
 |\||或者|
 |(pattern)|分组|
-|`(?P<name>pattern)`|效果同'()'，只不过可以自定义组名称，后面可以根据组名称获取组内容。不同的位置，引用方式也不同：<br />在当前模式中引用: (?P=name)或\1<br />在match对象中引用: m.group('name')或m.end('name')<br />在`re.sub()`的替换函数中: `\g<name>`或`\g<1>`或\1|
+|`(?P<name>pattern)`|效果同'()'，只不过可以自定义组名称，后面可以根据组名称获取组内容。不同的位置，引用方式也不同：<br />在当前模式中引用: (?P=name)或\1<br />在match对象中引用: m.group('name')或m.end('name')<br />在`re.sub()`的替换函数中: `\g<name>`或`\g<1>`或`\1`|
 |(?P=name)|在同一个模式串中引入前面定义的组|
 |\groupId|在模式中引用组号所匹配的内容，例如'(\d)abc\1' 可以匹配'9abc9'，'0abc0'等|
 
@@ -1279,11 +1279,28 @@ print(a1)
 |(?(id/name)yes-pattern\|no-pattern)|如果组id或名称存在，则匹配yes-pattern，否则匹配no-pattern|
 
 ### 13.2 正则模块
-Python 自1.5版本起增加了`re`模块，它提供Perl风格的正则表达式模式。  
-`re`模块使Python语言拥有全部的正则表达式功能。  
-`compile`函数根据一个模式字符串和可选的标志参数生成一个正则表达式对象。该对象拥有一系列方法用于正则表达式匹配和替换。  
+Python 自1.5版本起增加了`re`模块，它提供Perl风格的正则表达式模式。`re`模块使Python语言拥有全部的正则表达式功能。`re`模块包含多个函数、常量和一个异常。  
 
-#### 13.2.1 re.match函数
+#### 13.2.1 re常量
+- re.A, re.ASCII: 使`\w`, `\W`, `\b`, `\B`, `\d`, `\D`, `\s`, `\S`预定义模式仅匹配ASCII字符
+- re.DEBUG: 显示模式编译过程中的debug信息
+- re.I, re.IGNORECASE: 忽略大小写
+- re.L, re.LOCALE: 使`\w`, `\W`, `\b`, `\B`, `\s`, `\S`预定义模式依赖Locale
+- re.M, re.MULTILINE: 支持多行匹配
+- re.S, re.DOTALL: 使模式'.'可以匹配所有字符
+- re.X, re.VERBOSE: 支持在模式串中添加易读的注释信息等
+
+#### 13.2.2 re函数
+
+##### 13.2.2.1 compile函数
+`re.compile(pattern, flags=0)`，负责将正则模式串编译成正则表达式对象，可以调用其`match()`、`search()`等方法。  
+```python
+regexObj = re.compile(pattern)
+result = regexObj.match(string)
+# 等价于
+result = re.compile(pattern, string)
+```
+##### 13.2.2.2 match函数
 re.match函数尝试从字符串的起始位置匹配一个模式，如果不是起始位置匹配成功的话，返回None。  
 语法如下：  
 ```python
@@ -1322,7 +1339,7 @@ if unmatchObj is None:
 	print("no match")
 ```
 
-#### 13.2.2 re.search函数
+##### 13.2.2.3 search函数
 `re.search`函数扫描整个字符串并返回第一个成功的匹配，这一点有别于`re.match`函数。格式为：  
 ```python
 re.search(pattern, string, flags=0)
@@ -1359,7 +1376,20 @@ print(searchObj.group(1))
 ```
 `re.match`与`re.search`的区别是`re.match`只匹配字符串的开始，如果字符串不符合正则表达式，则匹配失败，函数返回None；而`re.search`匹配整个字符串，直到找到一个匹配。  
 
-#### 13.2.3 re.sub函数
+##### 13.2.2.4 fullmatch函数
+`re.fullmatch()`函数用于验证字符串是否完全匹配模式，如果全部匹配，返回对应的match对象，否则返回None。语法如下：  
+```python
+re.fullmatch(pattern, string, flags=0)
+```
+
+##### 13.2.2.5 split函数
+`re.split()`函数用于根据模式匹配的字符分割字符串。语法如下：  
+```python
+re.split(pattern, string, maxsplit=0, flags=0)
+```
+##### 13.2.2.6 findall函数
+##### 13.2.2.7 finditer函数
+##### 13.2.2.8 sub函数
 `re.sub`用于替换字符串中的匹配项。语法如下：  
 ```python
 re.sub(pattern, repl, string, count=0, flags=0)
@@ -1372,3 +1402,7 @@ re.sub(pattern, repl, string, count=0, flags=0)
 ```python
 
 ```
+##### 13.2.2.9 subn函数
+##### 13.2.2.10 escape函数
+##### 13.2.2.11 purge函数
+`re.purge()`函数用于清空表达式缓存。  
