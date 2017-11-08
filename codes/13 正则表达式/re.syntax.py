@@ -139,5 +139,56 @@ print(re.match('Windows(?!98|2000|xp)', 'Windows 10'))
 
 # pattern (?<=pattern)
 print("\n==========pattern (?<=pattern)==========")
-# match  boy
-print(re.match('(?<=hate|love)abc', 'hateabc'))
+# match  Windows
+print(re.search('(?<=XP|98|10)Windows', 'XPWindows'))
+
+# pattern (?<!pattern)
+print("\n==========pattern (?<pattern)==========")
+# match  Windows
+print(re.search('(?<!XP|98|10)Windows', 'NT Windows'))
+
+
+# pattern (?(id/name)yes-pattern\|no-pattern)
+print("\n==========pattern (?(id/name)yes-pattern\|no-pattern)==========")
+# match  1aaa
+print(re.search('(\d)(?(1)aaa|bbb)', '1aaa'))
+# None
+print(re.search('(\d)(?(1)aaa|bbb)', 'aaa'))
+# match bbb
+print(re.search('(\d)?(?(1)aaa|bbb)', 'bbb'))
+
+
+# pattern \number
+print("\n==========pattern \\number==========")
+# match 9abc9
+print(re.match(r'(\d)abc\1', '9abc9'))
+# match 123a123
+print(re.match(r'(\d+)a\1', '123a123'))
+
+# pattern \A
+print("\n==========pattern \A==========")
+# match ''
+print(re.match('\A', 'abc abc'))
+
+#pattern \b
+print("\n==========pattern \\b==========")
+# match ''
+print(re.search(r'\b', 'a b c'))
+# match er
+print(re.search(r'er\b', 'never'))
+# None
+print(re.search(r'er\b', 'verb'))
+# match py
+print(re.search(r'\bpy', 'python'))
+
+
+#pattern \B
+print("\n==========pattern \\B==========")
+# None
+print(re.search(r'\Bpy', 'python'))
+# match ba
+print(re.search(r'\Bba', 'cba'))
+# None
+print(re.search(r'ba\B', 'cba'))
+
+
